@@ -5,11 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Entity
-@Table(name = "invoice" /*sąskaita*/)
+@Table(name = "invoice")
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -21,10 +20,6 @@ public class Invoice {
     private String invoiceNr;
     @Column
     private LocalDate invoiceDate;
-    @ManyToOne
-    private Account account;
-    @ManyToOne
-    private Consumer consumer;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

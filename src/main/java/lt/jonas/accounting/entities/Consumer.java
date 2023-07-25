@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "consumer"/*vartotojas tiekejai klientai*/)
+@Table(name = "consumer")
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -41,8 +41,8 @@ public class Consumer {
     @Column
     @Enumerated(EnumType.STRING)
     private ConsumerRole consumerRole;
-    @OneToMany(mappedBy = "consumer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Invoice> invoices;
+//    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Invoice> invoices;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")

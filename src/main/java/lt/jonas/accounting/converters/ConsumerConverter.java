@@ -3,8 +3,6 @@ package lt.jonas.accounting.converters;
 import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.entities.Consumer;
 import org.springframework.data.domain.Page;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class ConsumerConverter {
         return consumer;
     }
 
-    public static ConsumerDTO convertConsumerToConsumerDto(Consumer consumer) {
+    public static ConsumerDTO convertConsumerToConsumerDTO(Consumer consumer) {
         ConsumerDTO consumerDTO = null;
         if (consumer != null) {
             consumerDTO = new ConsumerDTO();
@@ -56,10 +54,10 @@ public class ConsumerConverter {
 
     public static List<ConsumerDTO> convertConsumerListToConsumerDTOList(List<Consumer> consumersList) {
         List<ConsumerDTO> consumerDTOList = null;
-        if (consumersList != null && consumersList.isEmpty()) {
+        if (consumersList != null && !consumersList.isEmpty()) {
             consumerDTOList = new ArrayList<>();
             for (Consumer c : consumersList) {
-                consumerDTOList.add(convertConsumerToConsumerDto(c));
+                consumerDTOList.add(convertConsumerToConsumerDTO(c));
 
             }
         }
@@ -72,7 +70,7 @@ public class ConsumerConverter {
         if (consumerPage != null && !consumerPage.isEmpty()) {
             consumerDTOList = new ArrayList<>();
             for (Consumer c : consumerPage) {
-                consumerDTOList.add(convertConsumerToConsumerDto(c));
+                consumerDTOList.add(convertConsumerToConsumerDTO(c));
             }
         }
         return consumerDTOList;

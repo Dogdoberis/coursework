@@ -6,8 +6,6 @@ import lt.jonas.accounting.converters.ConsumerConverter;
 import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.entities.Consumer;
 import lt.jonas.accounting.repositories.ConsumerRepository;
-
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class ConsumerService {
 
     public ConsumerDTO createConsumer(Consumer consumer) {
         consumerRepository.save(consumer);
-        return ConsumerConverter.convertConsumerToConsumerDto(consumer);
+        return ConsumerConverter.convertConsumerToConsumerDTO(consumer);
     }
 
     public List<ConsumerDTO> getConsumers(Pageable pageable) {
@@ -34,13 +32,14 @@ public class ConsumerService {
 
     public ConsumerDTO getConsumerById(Long id) {
         return ConsumerConverter
-                .convertConsumerToConsumerDto(consumerRepository
+                .convertConsumerToConsumerDTO(consumerRepository
                         .findById(id)
                         .orElseThrow(NoSuchElementException::new));
     }
-    public ConsumerDTO getConsumerByTitle(Consumer consumer){
+
+    public ConsumerDTO getConsumerByTitle(Consumer consumer) {
         return ConsumerConverter
-                .convertConsumerToConsumerDto(consumerRepository
+                .convertConsumerToConsumerDTO(consumerRepository
                         .findByTitle(consumer.getTitle()));
 
 
@@ -63,6 +62,6 @@ public class ConsumerService {
         consumerToUpdate.setPhoneNumber(consumer.getPhoneNumber());
         consumerToUpdate.setConsumerRole(consumer.getConsumerRole());
         consumerRepository.save(consumerToUpdate);
-        return ConsumerConverter.convertConsumerToConsumerDto(consumerToUpdate);
+        return ConsumerConverter.convertConsumerToConsumerDTO(consumerToUpdate);
     }
 }

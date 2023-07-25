@@ -1,12 +1,14 @@
 package lt.jonas.accounting.dto;
 
-import lombok.Getter;
+
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.Getter;
 import lt.jonas.accounting.enumerators.ConsumerRole;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Setter
 @Getter

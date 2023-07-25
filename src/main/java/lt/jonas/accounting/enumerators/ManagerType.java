@@ -1,6 +1,6 @@
 package lt.jonas.accounting.enumerators;
 
-public enum AccountType {
+public enum ManagerType {
     ADMIN,
     USER
 }

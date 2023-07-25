@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/consumers")
 public class ConsumerController {
@@ -26,10 +26,10 @@ public class ConsumerController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(consumerService.createConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));
     }
-    @GetMapping("/{consumer}")
-    public ResponseEntity<ConsumerDTO> getConsumerByTitle(@PathVariable Consumer consumer){
-        return ResponseEntity.ok(consumerService.getConsumerByTitle(consumer));
-    }
+//    @GetMapping("/{consumer}")
+//    public ResponseEntity<ConsumerDTO> getConsumerByTitle(@PathVariable Consumer consumer){
+//        return ResponseEntity.ok(consumerService.getConsumerByTitle(consumer));
+//    }
 
 
     @GetMapping("/{id}")

@@ -3,31 +3,29 @@ package lt.jonas.accounting.entities;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lt.jonas.accounting.enumerators.AccountType;
+import lt.jonas.accounting.enumerators.ManagerType;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
 
 @Entity
-@Table(name = "account"/*vartotojas tiekejai klientai*/)
+@Table(name = "manager")
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Account {
+public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String name;
+    @Column(name = "last_name")
+    private String lastName;
     @Column
-    private BigInteger code;
-    @Column(name = "vat_code")
-    private String vatCode;
+    private String password;
     @Column
     @Enumerated(EnumType.STRING)
-    private AccountType accountType;
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Invoice> invoices;
+    private ManagerType managerType;
 
 
 }

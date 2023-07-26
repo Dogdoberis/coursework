@@ -32,11 +32,12 @@ public class ManagerService {
         return ManagerConverter.convertManagerListToManagerDTOList(managerRepository.findAll());
     }
 
+
     public ManagerDTO updateManager(Manager manager) {
         Manager managerToUpdate = managerRepository.findById(manager.getId()).orElseThrow(NoSuchElementException::new);
         managerToUpdate.setName(manager.getName());
         managerToUpdate.setLastName(manager.getLastName());
-        managerToUpdate.setManagerType(manager.getManagerType());
+        managerToUpdate.setManagerRole(manager.getManagerRole());
         managerRepository.save(managerToUpdate);
         return ManagerConverter.convertManagerToManagerDTO(managerToUpdate);
     }

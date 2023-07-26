@@ -3,10 +3,9 @@ package lt.jonas.accounting.entities;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lt.jonas.accounting.enumerators.ManagerType;
+import lt.jonas.accounting.enumerators.ManagerRole;
 import javax.persistence.*;
-import java.math.BigInteger;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "manager")
@@ -25,7 +24,19 @@ public class Manager {
     private String password;
     @Column
     @Enumerated(EnumType.STRING)
-    private ManagerType managerType;
+    private ManagerRole managerRole;
+    @Column(name = "created")
+    private LocalDateTime created;
+    @Column(name = "updated")
+    private LocalDateTime updated;
+    @PrePersist
+    void prePersist() {
+        this.created = LocalDateTime.now();
+    }
+    @PreUpdate
+    void preUpdate() {
+        this.updated = LocalDateTime.now();
+    }
 
 
 }

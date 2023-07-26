@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lt.jonas.accounting.entities.Manager;
-import lt.jonas.accounting.entities.Consumer;
 
 import java.time.LocalDate;
 

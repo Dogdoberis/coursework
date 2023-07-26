@@ -28,4 +28,7 @@ public class InvoiceService {
         invoiceToUpdate.setInvoiceDate(invoice.getInvoiceDate());
         return InvoiceConverter.convertInvoiceToInvoiceDTO(invoiceToUpdate);
     }
+    public void deleteInvoiceById(Long id){
+        invoiceRepository.deleteById(id);
+    }
 }

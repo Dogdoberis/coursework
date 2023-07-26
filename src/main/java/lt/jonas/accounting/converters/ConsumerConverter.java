@@ -24,7 +24,7 @@ public class ConsumerConverter {
             consumer.setPostCode(consumerDTO.getPostCode());
             consumer.setEmail(consumerDTO.getEmail());
             consumer.setPhoneNumber(consumerDTO.getPhoneNumber());
-            consumer.setConsumerRole(consumerDTO.getConsumerRole());
+            consumer.setConsumerType(consumerDTO.getConsumerType());
 
         }
         return consumer;
@@ -45,7 +45,7 @@ public class ConsumerConverter {
             consumerDTO.setPostCode(consumer.getPostCode());
             consumerDTO.setEmail(consumer.getEmail());
             consumerDTO.setPhoneNumber(consumer.getPhoneNumber());
-            consumerDTO.setConsumerRole(consumer.getConsumerRole());
+            consumerDTO.setConsumerType(consumer.getConsumerType());
 
 
         }

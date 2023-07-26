@@ -1,6 +1,6 @@
 package lt.jonas.accounting.enumerators;
 
-public enum ConsumerRole {
+public enum ConsumerType {
 
     SELLER,
     BUYER

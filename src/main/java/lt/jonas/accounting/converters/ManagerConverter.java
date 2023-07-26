@@ -16,8 +16,8 @@ public class ManagerConverter {
             manager = new Manager();
             manager.setId(managerDTO.getId());
             manager.setName(managerDTO.getName());
-            manager.setLastName(manager.getLastName());
-            manager.setManagerType(managerDTO.getManagerType());
+            manager.setLastName(managerDTO.getLastName());
+            manager.setManagerRole(managerDTO.getManagerRole());
 
         }
         return manager;
@@ -30,7 +30,7 @@ public class ManagerConverter {
             managerDTO.setId(manager.getId());
             managerDTO.setName(manager.getName());
             managerDTO.setLastName(manager.getLastName());
-            managerDTO.setManagerType(manager.getManagerType());
+            managerDTO.setManagerRole(manager.getManagerRole());
 
         }
         return managerDTO;

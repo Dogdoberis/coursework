@@ -21,18 +21,18 @@ public class Invoice {
     @Column
     private LocalDate invoiceDate;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Column(name = "created")
+    private LocalDateTime created;
+    @Column(name = "updated")
+    private LocalDateTime updated;
 
     @PrePersist
     void prePersist() {
-        this.createdAt = LocalDateTime.now();
+        this.created = LocalDateTime.now();
     }
 
     @PreUpdate
     void preUpdate() {
-        this.updatedAt = LocalDateTime.now();
+        this.updated = LocalDateTime.now();
     }
 }

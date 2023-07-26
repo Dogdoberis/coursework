@@ -60,7 +60,7 @@ public class ConsumerService {
         consumerToUpdate.setPostCode(consumer.getPostCode());
         consumerToUpdate.setEmail(consumer.getEmail());
         consumerToUpdate.setPhoneNumber(consumer.getPhoneNumber());
-        consumerToUpdate.setConsumerRole(consumer.getConsumerRole());
+        consumerToUpdate.setConsumerType(consumer.getConsumerType());
         consumerRepository.save(consumerToUpdate);
         return ConsumerConverter.convertConsumerToConsumerDTO(consumerToUpdate);
     }

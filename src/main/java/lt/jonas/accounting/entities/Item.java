@@ -1,49 +1,35 @@
 package lt.jonas.accounting.entities;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lt.jonas.accounting.enumerators.ConsumerType;
+import lt.jonas.accounting.enumerators.ItemType;
+
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
-
 @Entity
-@Table(name = "consumer")
+@Table(name = "item")
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Consumer {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String title;
     @Column
-    private String name;
+    private Double price;
     @Column
-    private BigInteger code;
-    @Column(name = "vat_code")
-    private String vatCode;
-    @Column
-    private String city;
-    @Column
-    private String street;
-    @Column(name= "house_number")
-    private String houseNumber;
-    @Column(name = "post_code")
-    private Integer postCode;
-    @Column
-    private String email;
-    @Column(name = "phone_number")
-    private BigInteger phoneNumber;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private ConsumerType consumerType;
+    private String description;
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")
     private LocalDateTime updated;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private ItemType itemType;
     @PrePersist
     void prePersist() {
         this.created = LocalDateTime.now();
@@ -52,5 +38,4 @@ public class Consumer {
     void preUpdate() {
         this.updated = LocalDateTime.now();
     }
-
 }

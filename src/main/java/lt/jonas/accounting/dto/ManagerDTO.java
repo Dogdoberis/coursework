@@ -1,7 +1,7 @@
 package lt.jonas.accounting.dto;
 
 import lombok.*;
-import lt.jonas.accounting.enumerators.ManagerType;
+import lt.jonas.accounting.enumerators.ManagerRole;
 
 
 @RequiredArgsConstructor
@@ -12,5 +12,5 @@ public class ManagerDTO {
     private String name;
     private String lastName;
     private String password;
-    private ManagerType managerType;
+    private ManagerRole managerRole;
 }

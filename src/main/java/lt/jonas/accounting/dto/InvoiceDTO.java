@@ -6,6 +6,7 @@ import lombok.Setter;
 import lt.jonas.accounting.entities.Manager;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Setter
@@ -14,8 +15,9 @@ public class InvoiceDTO {
 
     private Long id;
     private String invoiceNr;
-
     private LocalDate invoiceDate;
-    private Manager manager;
+    private ManagerDTO managerDTO;
+    private ConsumerDTO consumerDTO;
+    private List<ItemDTO> itemDTOList;
 
 }

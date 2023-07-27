@@ -1,12 +1,15 @@
 package lt.jonas.accounting.services;
 
+import lombok.RequiredArgsConstructor;
 import lt.jonas.accounting.converters.OwnerConverter;
 import lt.jonas.accounting.dto.OwnerDTO;
 import lt.jonas.accounting.entities.Owner;
 import lt.jonas.accounting.repositories.OwnerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-
+@Service
+@RequiredArgsConstructor
 public class OwnerService {
     private OwnerRepository ownerRepository;
     public OwnerDTO createOwner(Owner Owner) {

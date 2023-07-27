@@ -9,6 +9,7 @@ import lt.jonas.accounting.repositories.ConsumerRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -37,13 +38,6 @@ public class ConsumerService {
                         .orElseThrow(NoSuchElementException::new));
     }
 
-    public ConsumerDTO getConsumerByTitle(Consumer consumer) {
-        return ConsumerConverter
-                .convertConsumerToConsumerDTO(consumerRepository
-                        .findByTitle(consumer.getTitle()));
-
-
-    }
 
 
     public ConsumerDTO updateConsumer(Consumer consumer) {
@@ -64,4 +58,18 @@ public class ConsumerService {
         consumerRepository.save(consumerToUpdate);
         return ConsumerConverter.convertConsumerToConsumerDTO(consumerToUpdate);
     }
+    public List<ConsumerDTO> searchConsumers(String name, Long code, String vatCode) {
+        List<Consumer> consumers = null;
+        if (name != null) {
+            consumers = consumerRepository.findByNameIgnoreCaseContaining(name);        }
+        if (code != null) {
+            consumers.addAll(consumerRepository.findByCode(code.toString()));
+        }
+        if (vatCode != null) {
+            consumers.addAll(consumerRepository.findByVatCodeContaining(vatCode));
+        }
+
+        return ConsumerConverter.convertConsumerListToConsumerDTOList(consumers);
+    }
 }
+

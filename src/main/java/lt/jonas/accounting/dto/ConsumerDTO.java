@@ -17,7 +17,7 @@ public class ConsumerDTO {
     private Long id;
     private String title;
     private String name;
-    private BigInteger code;
+    private Long code;
     private String vatCode;
     private String city;
     private String street;
@@ -26,6 +26,5 @@ public class ConsumerDTO {
     private String email;
     private BigInteger phoneNumber;
     private ConsumerType consumerType;
-
     private LocalDateTime updatedAt;
 }

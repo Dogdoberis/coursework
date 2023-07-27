@@ -11,12 +11,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/consumers")
 public class ConsumerController {
+    String mesage = "According to the submitted search, nothing was found";
     @Autowired
     ConsumerService consumerService;
 
@@ -26,19 +28,37 @@ public class ConsumerController {
                 .body(consumerService.createConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/byId/{id}")
     public ResponseEntity<ConsumerDTO> getConsumerById(@PathVariable Long id) {
         return ResponseEntity.ok(consumerService.getConsumerById(id));
     }
+
     @GetMapping
-    public ResponseEntity<List<ConsumerDTO>> getAllConsumers(@PageableDefault Pageable pageable){
+    public ResponseEntity<List<ConsumerDTO>> getAllConsumers(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(consumerService.getConsumers(pageable));
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ConsumerDTO> updateConsumer(@RequestBody ConsumerDTO consumerDTO){
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ConsumerDTO> updateConsumer(@RequestBody ConsumerDTO consumerDTO) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(consumerService.updateConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchConsumers(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long code,
+            @RequestParam(required = false) String vatCode) {
+        List<ConsumerDTO> consumers = consumerService.searchConsumers(name, code, vatCode);
+
+        if (!consumers.isEmpty()) {
+
+            return ResponseEntity.ok(consumers);
+
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mesage);
+
+        }
     }
 }

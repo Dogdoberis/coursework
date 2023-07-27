@@ -22,7 +22,7 @@ public class Consumer {
     @Column
     private String name;
     @Column
-    private BigInteger code;
+    private Long code;
     @Column(name = "vat_code")
     private String vatCode;
     @Column

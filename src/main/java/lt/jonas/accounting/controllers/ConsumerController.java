@@ -2,6 +2,7 @@ package lt.jonas.accounting.controllers;
 
 import lt.jonas.accounting.converters.ConsumerConverter;
 import lt.jonas.accounting.dto.ConsumerDTO;
+import lt.jonas.accounting.exeptions.ConsumerNotFoundExeption;
 import lt.jonas.accounting.services.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +10,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 
 import java.util.List;
@@ -21,6 +21,7 @@ public class ConsumerController {
     String mesage = "According to the submitted search, nothing was found";
     @Autowired
     ConsumerService consumerService;
+
 
     @PostMapping
     public ResponseEntity<ConsumerDTO> createConsumer(@RequestBody ConsumerDTO consumerDTO) {
@@ -46,19 +47,18 @@ public class ConsumerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchConsumers(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) Long code,
-            @RequestParam(required = false) String vatCode) {
+    public ResponseEntity<?> searchConsumers(@PageableDefault
+                                             @RequestParam(required = false) String name,
+                                             @RequestParam(required = false) Long code,
+                                             @RequestParam(required = false) String vatCode) {
         List<ConsumerDTO> consumers = consumerService.searchConsumers(name, code, vatCode);
-
-        if (!consumers.isEmpty()) {
-
-            return ResponseEntity.ok(consumers);
-
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mesage);
+        try {
+            if (!consumers.isEmpty()) {
+            }
+        } catch (NullPointerException e) {
+            throw new ConsumerNotFoundExeption();
 
         }
+        return ResponseEntity.ok(consumers);
     }
 }

@@ -2,8 +2,6 @@ package lt.jonas.accounting.controllers;
 
 
 import lt.jonas.accounting.converters.InvoiceConverter;
-
-
 import lt.jonas.accounting.dto.InvoiceDTO;
 import lt.jonas.accounting.services.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;

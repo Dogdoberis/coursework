@@ -6,6 +6,7 @@ import lt.jonas.accounting.enumerators.ConsumerType;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -40,10 +41,13 @@ public class Consumer {
     @Column
     @Enumerated(EnumType.STRING)
     private ConsumerType consumerType;
+
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")
     private LocalDateTime updated;
+    @OneToMany(mappedBy = "customer")
+    private List<Invoice> invoices;
     @PrePersist
     void prePersist() {
         this.created = LocalDateTime.now();

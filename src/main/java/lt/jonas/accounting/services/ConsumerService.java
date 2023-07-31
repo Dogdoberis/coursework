@@ -5,10 +5,13 @@ import lombok.RequiredArgsConstructor;
 import lt.jonas.accounting.converters.ConsumerConverter;
 import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.entities.Consumer;
+import lt.jonas.accounting.exeptions.ConsumerNotFoundExeption;
 import lt.jonas.accounting.repositories.ConsumerRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -39,7 +42,6 @@ public class ConsumerService {
     }
 
 
-
     public ConsumerDTO updateConsumer(Consumer consumer) {
         Consumer consumerToUpdate = consumerRepository
                 .findById(consumer.getId())
@@ -58,18 +60,25 @@ public class ConsumerService {
         consumerRepository.save(consumerToUpdate);
         return ConsumerConverter.convertConsumerToConsumerDTO(consumerToUpdate);
     }
+
     public List<ConsumerDTO> searchConsumers(String name, Long code, String vatCode) {
         List<Consumer> consumers = null;
         if (name != null) {
-            consumers = consumerRepository.findByNameIgnoreCaseContaining(name);        }
+            name = name.replaceAll("[\\d?.,-/d]+", "");
+            consumers = consumerRepository.findByNameIgnoreCaseContaining(name);
+        } else if (name == null || name.isEmpty()) {
+            consumers = consumerRepository.findAll();
+        }
         if (code != null) {
-            consumers.addAll(consumerRepository.findByCode(code.toString()));
+            consumers = (consumerRepository.findByCode(code.toString()));
+        } else if (vatCode != null) {
+            consumers = (consumerRepository.findByVatCodeContaining(vatCode));
         }
-        if (vatCode != null) {
-            consumers.addAll(consumerRepository.findByVatCodeContaining(vatCode));
-        }
-
         return ConsumerConverter.convertConsumerListToConsumerDTOList(consumers);
+
+
     }
+
+
 }
 

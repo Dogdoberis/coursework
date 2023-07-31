@@ -6,6 +6,7 @@ import lombok.Setter;
 import lt.jonas.accounting.enumerators.ManagerRole;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "manager")
@@ -22,6 +23,8 @@ public class Manager {
     private String lastName;
     @Column
     private String password;
+    @OneToMany(mappedBy = "manager")
+    private List<Invoice> invoices;
     @Column
     @Enumerated(EnumType.STRING)
     private ManagerRole managerRole;

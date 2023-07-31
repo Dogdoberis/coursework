@@ -7,6 +7,7 @@ import lt.jonas.accounting.enumerators.ItemType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -23,6 +24,9 @@ public class Item {
     private Double price;
     @Column
     private String description;
+    @ManyToOne
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")
@@ -30,12 +34,5 @@ public class Item {
     @Column
     @Enumerated(EnumType.STRING)
     private ItemType itemType;
-    @PrePersist
-    void prePersist() {
-        this.created = LocalDateTime.now();
-    }
-    @PreUpdate
-    void preUpdate() {
-        this.updated = LocalDateTime.now();
-    }
+
 }

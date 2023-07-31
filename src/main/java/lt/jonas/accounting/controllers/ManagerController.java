@@ -1,9 +1,7 @@
 package lt.jonas.accounting.controllers;
 
 import lt.jonas.accounting.converters.ManagerConverter;
-
 import lt.jonas.accounting.dto.ManagerDTO;
-
 import lt.jonas.accounting.services.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 
 @RestController

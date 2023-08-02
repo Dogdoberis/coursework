@@ -11,6 +11,7 @@ import lt.jonas.accounting.enumerators.ItemType;
 @Getter
 public class ItemDTO {
     private Long id;
+    private String code;
     private String title;
     private Double price;
     private String description;

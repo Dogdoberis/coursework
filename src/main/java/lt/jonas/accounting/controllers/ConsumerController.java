@@ -23,15 +23,13 @@ public class ConsumerController {
     @Autowired
     ConsumerService consumerService;
 
-
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ConsumerDTO> createConsumer(@RequestBody ConsumerDTO consumerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(consumerService.createConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));
     }
-
-    @GetMapping("/byId/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ConsumerDTO> getConsumerById(@PathVariable Long id) {
         return ResponseEntity.ok(consumerService.getConsumerById(id));
     }
@@ -40,28 +38,24 @@ public class ConsumerController {
     public ResponseEntity<List<ConsumerDTO>> getAllConsumers(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(consumerService.getConsumers(pageable));
     }
-
-
     @PutMapping("/update/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ConsumerDTO> updateConsumer(@RequestBody ConsumerDTO consumerDTO) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(consumerService.updateConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));
     }
-
     @GetMapping("/search")
     public ResponseEntity<?> searchConsumers(@PageableDefault
                                              @RequestParam(required = false) String name,
                                              @RequestParam(required = false) Long code,
                                              @RequestParam(required = false) String vatCode) {
-        List<ConsumerDTO> consumers = consumerService.searchConsumers(name, code, vatCode);
+        List<ConsumerDTO> consumerDTOList = consumerService.searchConsumers(name, code, vatCode);
         try {
-            if (!consumers.isEmpty()) {
+            if (!consumerDTOList.isEmpty()) {
             }
         } catch (NullPointerException e) {
             return ResponseEntity.status(HttpStatus.OK).body(mesage);
-
         }
-        return ResponseEntity.ok(consumers);
+        return ResponseEntity.ok(consumerDTOList);
     }
 }

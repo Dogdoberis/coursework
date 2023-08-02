@@ -17,6 +17,8 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
+    private String code;
+    @Column
     private String title;
     @Column
     private Double price;

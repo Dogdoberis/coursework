@@ -22,11 +22,8 @@ public class ConsumerService {
     }
 
     public List<ConsumerDTO> getConsumers(Pageable pageable) {
-        if (pageable != null) {
             return ConsumerConverter.convertConsumerPageToConsumerDTOList(consumerRepository.findAll(pageable));
 
-        }
-        return ConsumerConverter.convertConsumerListToConsumerDTOList(consumerRepository.findAll());
     }
 
     public ConsumerDTO getConsumerById(Long id) {
@@ -35,7 +32,6 @@ public class ConsumerService {
                         .findById(id)
                         .orElseThrow(NoSuchElementException::new));
     }
-
 
     public ConsumerDTO updateConsumer(Consumer consumer) {
         Consumer consumerToUpdate = consumerRepository

@@ -43,8 +43,7 @@ public class InvoiceService {
     public List<InvoiceDTO> findInvoicesByPeriod(LocalDate fromDate, LocalDate toDate) {
         return InvoiceConverter.convertInvoicesToInvoicesDTOList(invoiceRepository.findByInvoiceDateBetween(fromDate, toDate));
     }
-
-    public void deleteInvoiceById(Long id) {
+    public void deleteInvoiceById(Long id)throws IllegalStateException {
         invoiceRepository.deleteById(id);
     }
 }

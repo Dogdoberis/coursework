@@ -20,7 +20,12 @@ public class AuthConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/invoices**").permitAll()
+                .antMatchers("/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html").permitAll()
+                .and()
+                .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

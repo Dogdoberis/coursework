@@ -17,21 +17,23 @@ import java.util.List;
 @RequestMapping("/items")
 @PreAuthorize("hasRole('ADMIN')")
 public class ItemController {
+    String mesage = "According to the submitted search, nothing was found";
     @Autowired
     ItemService itemService;
+
     @PostMapping
-    public ResponseEntity<ItemDTO> createItem(@RequestBody ItemDTO itemDTO){
+    public ResponseEntity<ItemDTO> createItem(@RequestBody ItemDTO itemDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(itemService.createItem(ItemConverter.convertItemDTOToItem(itemDTO)));
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ItemDTO> updateItem(@RequestBody ItemDTO itemDTO){
+    public ResponseEntity<ItemDTO> updateItem(@RequestBody ItemDTO itemDTO) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(itemService.updateItem(ItemConverter.convertItemDTOToItem(itemDTO)));
     }
     @GetMapping("/{id}")
-    public  ResponseEntity<ItemDTO> getItemById(@RequestBody Long id){
+    public ResponseEntity<ItemDTO> getItemById(@RequestBody Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
     }
     @GetMapping
@@ -40,8 +42,22 @@ public class ItemController {
     }
     @DeleteMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteItemById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteItemById(Long id) {
         itemService.deleteItemById(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/serch")
+    public ResponseEntity<?> serchItems(@PageableDefault
+                                        @RequestParam(required = false) String code,
+                                        @RequestParam(required = false) String title,
+                                        @RequestParam(required = false) String description) {
+        List<ItemDTO> itemDTOList = itemService.searchItems(code, title, description);
+        try {
+            if (!itemDTOList.isEmpty()) {
+            }
+        }catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.OK).body(mesage);
+        }
+        return ResponseEntity.ok(itemDTOList);
     }
 }

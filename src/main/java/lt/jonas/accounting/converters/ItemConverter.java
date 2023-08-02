@@ -13,6 +13,7 @@ public class ItemConverter {
         if (item != null) {
             itemDTO = new ItemDTO();
             itemDTO.setId(item.getId());
+            itemDTO.setCode(item.getCode());
             itemDTO.setTitle(item.getTitle());
             itemDTO.setPrice(item.getPrice());
             itemDTO.setDescription(item.getDescription());
@@ -26,6 +27,7 @@ public class ItemConverter {
         if (itemDTO != null) {
             item = new Item();
             item.setId(itemDTO.getId());
+            item.setCode(itemDTO.getCode());
             item.setTitle(itemDTO.getTitle());
             item.setPrice(itemDTO.getPrice());
             item.setDescription(itemDTO.getDescription());

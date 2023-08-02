@@ -2,8 +2,15 @@ package lt.jonas.accounting.controllers;
 
 
 import lt.jonas.accounting.converters.InvoiceConverter;
+import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.dto.InvoiceDTO;
+import lt.jonas.accounting.dto.ItemDTO;
+import lt.jonas.accounting.dto.UserDTO;
+import lt.jonas.accounting.entities.Item;
+import lt.jonas.accounting.services.ConsumerService;
 import lt.jonas.accounting.services.InvoiceService;
+import lt.jonas.accounting.services.ItemService;
+import lt.jonas.accounting.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -13,16 +20,25 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/invoices")
 public class InvoiceController {
     @Autowired
     InvoiceService invoiceService;
+    @Autowired
+    ConsumerService consumerService;
+    @Autowired
+    ItemService itemService;
+    @Autowired
+    UserService userService;
 
     @PostMapping
-    public ResponseEntity<InvoiceDTO> writeNewInvoice(@RequestBody InvoiceDTO invoiceDTO) {
+    public ResponseEntity<InvoiceDTO> writeNewInvoice(@RequestBody InvoiceDTO invoiceDTO) throws IllegalArgumentException {
         return ResponseEntity
                 .status(HttpStatus.CREATED).body(invoiceService.newInvoice(InvoiceConverter.convertInvoiceDtoToInvoice(invoiceDTO)));
     }
@@ -33,12 +49,14 @@ public class InvoiceController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(invoiceService.updateInvoice(InvoiceConverter.convertInvoiceDtoToInvoice(invoiceDTO)));
     }
+
     @GetMapping
     public ResponseEntity<List<InvoiceDTO>> getAllInvoices(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(invoiceService.getInvoices(pageable));
     }
+
     @GetMapping("/invoices")
-    public ResponseEntity<List<InvoiceDTO>> getIvoicesByPeriod(@RequestParam("fromDate") String fromDateS, @RequestParam("toDate") String toDateS){
+    public ResponseEntity<List<InvoiceDTO>> getIvoicesByPeriod(@RequestParam("fromDate") String fromDateS, @RequestParam("toDate") String toDateS) {
         LocalDate fromDate = LocalDate.parse(fromDateS);
         LocalDate toDade = LocalDate.parse(toDateS);
         return ResponseEntity.ok(invoiceService.findInvoicesByPeriod(fromDate, toDade));

@@ -21,8 +21,6 @@ public class Invoice {
     private String invoiceNr;
     @Column
     private LocalDate invoiceDate;
-    @ManyToOne
-    private Owner ownerId;
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")

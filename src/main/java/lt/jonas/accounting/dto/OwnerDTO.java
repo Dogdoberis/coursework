@@ -3,10 +3,8 @@ package lt.jonas.accounting.dto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-
 import java.math.BigInteger;
-import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Setter
 @Getter
@@ -23,5 +21,4 @@ public class OwnerDTO {
     private String email;
     private BigInteger phoneNumber;
 
-    private LocalDateTime updatedAt;
 }

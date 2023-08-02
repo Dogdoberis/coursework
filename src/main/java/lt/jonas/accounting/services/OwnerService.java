@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 @Service
 @RequiredArgsConstructor
 public class OwnerService {
-    private OwnerRepository ownerRepository;
+    private final OwnerRepository ownerRepository;
     public OwnerDTO createOwner(Owner Owner) {
         ownerRepository.save(Owner);
         return OwnerConverter.convertOwnerToOwnerDTO(Owner);

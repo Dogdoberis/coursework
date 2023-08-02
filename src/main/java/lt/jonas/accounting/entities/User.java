@@ -1,33 +1,39 @@
 package lt.jonas.accounting.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lt.jonas.accounting.enumerators.ManagerRole;
+import lt.jonas.accounting.enumerators.Role;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "manager")
+@Table(name = "users")
 @Getter
 @Setter
-@RequiredArgsConstructor
-public class Manager {
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String name;
+    @Column(name = "username")
+    private String userName;
     @Column(name = "last_name")
     private String lastName;
     @Column
     private String password;
-    @OneToMany(mappedBy = "manager")
+    @OneToMany(mappedBy = "user")
     private List<Invoice> invoices;
-    @Column
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private ManagerRole managerRole;
+    private Role role;
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")

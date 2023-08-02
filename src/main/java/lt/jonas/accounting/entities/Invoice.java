@@ -38,8 +38,8 @@ public class Invoice {
     private Owner owner;
 
     @ManyToOne
-    @JoinColumn(name = "manager_id")
-    private Manager manager;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @PrePersist
     void prePersist() {

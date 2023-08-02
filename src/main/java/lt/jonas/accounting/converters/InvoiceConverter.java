@@ -1,7 +1,10 @@
 package lt.jonas.accounting.converters;
 
 import lt.jonas.accounting.dto.InvoiceDTO;
+import lt.jonas.accounting.dto.ItemDTO;
 import lt.jonas.accounting.entities.Invoice;
+import lt.jonas.accounting.entities.Item;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -41,5 +44,14 @@ public class InvoiceConverter {
             }
         }
         return invoiceDTOList;
+    }
+    public static List<InvoiceDTO> convertInvoicePageToInvoiceDTOList(Page<Invoice> invoicesPage){
+        List<InvoiceDTO> invoiceDTOList = null;
+        if (invoicesPage != null && !invoicesPage.isEmpty()){
+            invoiceDTOList = new ArrayList<>();
+            for (Invoice i : invoicesPage) {
+                invoiceDTOList.add(convertInvoiceToInvoiceDTO(i));
+            }
+        }return invoiceDTOList;
     }
 }

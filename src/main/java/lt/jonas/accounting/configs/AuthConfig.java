@@ -20,9 +20,7 @@ public class AuthConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/consumer**").permitAll()
-                .antMatchers("/owner/**").permitAll()
-                .antMatchers("/items/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
@@ -31,25 +29,20 @@ public class AuthConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails student = User
-//                .withUsername("student")
-//                .password(passwordEncoder().encode("student1"))
-//                .roles("STUDENT")
-//                .build();
-//
-//        UserDetails teacher = User
-//                .withUsername("teacher")
-//                .password(passwordEncoder().encode("teacher1"))
-//                .roles("TEACHER")
-//                .build();
-
         UserDetails admin = User
                 .withUsername("admin")
                 .password(passwordEncoder().encode("admin123"))
                 .roles("ADMIN")
                 .build();
 
-        UserDetails[] userDetails = new UserDetails[]{admin};
+        UserDetails manager = User
+                .withUsername("manager")
+                .password(passwordEncoder().encode("manager123"))
+                .roles("USER")
+                .build();
+
+
+        UserDetails[] userDetails = new UserDetails[]{admin, manager};
         return new InMemoryUserDetailsManager(userDetails);
     }
 

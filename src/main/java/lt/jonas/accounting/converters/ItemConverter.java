@@ -1,8 +1,6 @@
 package lt.jonas.accounting.converters;
 
-import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.dto.ItemDTO;
-import lt.jonas.accounting.entities.Consumer;
 import lt.jonas.accounting.entities.Item;
 import org.springframework.data.domain.Page;
 

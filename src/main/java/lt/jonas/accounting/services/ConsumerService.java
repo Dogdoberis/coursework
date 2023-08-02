@@ -5,14 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lt.jonas.accounting.converters.ConsumerConverter;
 import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.entities.Consumer;
-import lt.jonas.accounting.exeptions.ConsumerNotFoundExeption;
 import lt.jonas.accounting.repositories.ConsumerRepository;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 

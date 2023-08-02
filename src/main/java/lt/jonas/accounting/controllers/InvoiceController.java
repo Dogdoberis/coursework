@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ public class InvoiceController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<InvoiceDTO> updateInvoiceById(@RequestBody InvoiceDTO invoiceDTO) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(invoiceService.updateInvoice(InvoiceConverter.convertInvoiceDtoToInvoice(invoiceDTO)));
@@ -48,6 +50,7 @@ public class InvoiceController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteInvoiceById(@PathVariable Long id) {
         invoiceService.deleteInvoiceById(id);
         return ResponseEntity.noContent().build();

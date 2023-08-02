@@ -2,7 +2,6 @@ package lt.jonas.accounting.controllers;
 
 import lt.jonas.accounting.converters.ConsumerConverter;
 import lt.jonas.accounting.dto.ConsumerDTO;
-import lt.jonas.accounting.exeptions.ConsumerNotFoundExeption;
 import lt.jonas.accounting.services.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/consumers")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 public class ConsumerController {
     String mesage = "According to the submitted search, nothing was found";
     @Autowired
@@ -26,6 +25,7 @@ public class ConsumerController {
 
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ConsumerDTO> createConsumer(@RequestBody ConsumerDTO consumerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(consumerService.createConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));
@@ -43,6 +43,7 @@ public class ConsumerController {
 
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ConsumerDTO> updateConsumer(@RequestBody ConsumerDTO consumerDTO) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(consumerService.updateConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));

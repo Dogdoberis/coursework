@@ -42,8 +42,8 @@ public class Owner {
     private LocalDateTime created;
     @Column(name = "updated")
     private LocalDateTime updated;
-    @OneToMany(mappedBy = "owner")
-    private List<Invoice> invoices;
+//    @OneToMany(mappedBy = "owner")
+//    private List<Invoice> invoices;
 
     @PrePersist
     void prePersist() {

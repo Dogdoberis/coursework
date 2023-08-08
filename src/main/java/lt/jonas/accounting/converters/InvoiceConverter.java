@@ -14,6 +14,9 @@ public class InvoiceConverter {
             invoiceDTO.setId(invoice.getId());
             invoiceDTO.setInvoiceNr(invoice.getInvoiceNr());
             invoiceDTO.setInvoiceDate(invoice.getInvoiceDate());
+            invoiceDTO.setConsumerDTO(ConsumerConverter.convertConsumerToConsumerDTO(invoice.getConsumer()));
+            invoiceDTO.setUserDTO(UserConverter.convertUserToUserDTO(invoice.getUser()));
+            invoiceDTO.setItemDTOList(ItemConverter.convertItemListToItemDTOList(invoice.getItems()));
 
         }
         return invoiceDTO;
@@ -26,6 +29,9 @@ public class InvoiceConverter {
             invoice.setId(invoiceDTO.getId());
             invoice.setInvoiceNr(invoiceDTO.getInvoiceNr());
             invoice.setInvoiceDate(invoiceDTO.getInvoiceDate());
+            invoice.setUser(UserConverter.convertUserDTOToUser(invoiceDTO.getUserDTO()));
+            invoice.setConsumer(ConsumerConverter.convertConsumerDtoToConsumer(invoiceDTO.getConsumerDTO()));
+            invoice.setItems(ItemConverter.convertItemDTOListToItemList(invoiceDTO.getItemDTOList()));
         }
         return invoice;
     }

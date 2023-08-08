@@ -6,12 +6,14 @@ import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.dto.InvoiceDTO;
 import lt.jonas.accounting.dto.ItemDTO;
 import lt.jonas.accounting.dto.UserDTO;
+import lt.jonas.accounting.entities.Invoice;
 import lt.jonas.accounting.entities.Item;
 import lt.jonas.accounting.services.ConsumerService;
 import lt.jonas.accounting.services.InvoiceService;
 import lt.jonas.accounting.services.ItemService;
 import lt.jonas.accounting.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -38,7 +40,16 @@ public class InvoiceController {
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<InvoiceDTO> writeNewInvoice(@RequestBody InvoiceDTO invoiceDTO) throws IllegalArgumentException {
+    public ResponseEntity<InvoiceDTO> writeNewInvoice(@RequestBody InvoiceDTO invoiceDTO) throws InvalidDataAccessApiUsageException {
+        UserDTO userDTO = userService.getUserById(invoiceDTO.getUserDTO().getId());
+        ConsumerDTO consumerDTO = consumerService.getConsumerById(invoiceDTO.getConsumerDTO().getId());
+        List<ItemDTO> itemDTOList = itemService.getItemsByIds(invoiceDTO.getItemDTOList().stream()
+                .map(ItemDTO::getId)
+                .collect(Collectors.toList()));
+        invoiceDTO.setUserDTO(userDTO);
+        invoiceDTO.setConsumerDTO(consumerDTO);
+        invoiceDTO.setItemDTOList(itemDTOList);
+
         return ResponseEntity
                 .status(HttpStatus.CREATED).body(invoiceService.newInvoice(InvoiceConverter.convertInvoiceDtoToInvoice(invoiceDTO)));
     }

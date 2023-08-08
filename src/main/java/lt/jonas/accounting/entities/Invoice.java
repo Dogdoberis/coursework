@@ -1,7 +1,7 @@
 package lt.jonas.accounting.entities;
 
 import lombok.*;
-
+import lt.jonas.accounting.enumerators.ItemType;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,31 +21,24 @@ public class Invoice {
     private String invoiceNr;
     @Column
     private LocalDate invoiceDate;
+    @ManyToOne
+    @JoinColumn(name = "consumer_id")
+    private Consumer consumer;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+    @OneToMany
+    @JoinColumn(name = "item_id")
+    private List<Item> items;
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")
     private LocalDateTime updated;
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Consumer customer;
-    @OneToMany(mappedBy = "invoice")
-    private List<Item> items;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private ItemType itemType;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @PrePersist
-    void prePersist() {
-        this.created = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    void preUpdate() {
-        this.updated = LocalDateTime.now();
-    }
 }

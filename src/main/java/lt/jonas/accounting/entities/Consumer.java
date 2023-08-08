@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lt.jonas.accounting.enumerators.ConsumerType;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Consumer {
+public class Consumer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,7 +47,7 @@ public class Consumer {
     private LocalDateTime created;
     @Column(name = "updated")
     private LocalDateTime updated;
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "consumer")
     private List<Invoice> invoices;
     @PrePersist
     void prePersist() {

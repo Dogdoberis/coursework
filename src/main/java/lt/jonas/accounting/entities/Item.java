@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lt.jonas.accounting.enumerators.ItemType;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -25,7 +27,6 @@ public class Item {
     @Column
     private String description;
     @ManyToOne
-    @JoinColumn(name = "invoice_id")
     private Invoice invoice;
     @Column(name = "created")
     private LocalDateTime created;

@@ -4,10 +4,12 @@ package lt.jonas.accounting.dto;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.Getter;
+import lt.jonas.accounting.entities.Invoice;
 import lt.jonas.accounting.enumerators.ConsumerType;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Setter
@@ -26,5 +28,6 @@ public class ConsumerDTO {
     private String email;
     private BigInteger phoneNumber;
     private ConsumerType consumerType;
-    private LocalDateTime updatedAt;
+//    private List<InvoiceDTO> invoicesDTO;
+
 }

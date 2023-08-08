@@ -29,10 +29,10 @@ public class ConsumerController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(consumerService.createConsumer(ConsumerConverter.convertConsumerDtoToConsumer(consumerDTO)));
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<ConsumerDTO> getConsumerById(@PathVariable Long id) {
-        return ResponseEntity.ok(consumerService.getConsumerById(id));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ConsumerDTO> getConsumerById(@PathVariable Long id) {
+//        return ResponseEntity.ok(consumerService.getConsumerById(id));
+//    }
 
     @GetMapping
     public ResponseEntity<List<ConsumerDTO>> getAllConsumers(@PageableDefault Pageable pageable) {

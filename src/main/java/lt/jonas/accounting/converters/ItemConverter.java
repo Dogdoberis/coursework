@@ -45,7 +45,16 @@ public class ItemConverter {
             }
         }
         return itemDTOList;
-
+    }
+        public static List<Item> convertItemDTOListToItemList(List<ItemDTO> itemDTOList) {
+            List<Item> itemList = null;
+            if (itemDTOList != null && !itemDTOList.isEmpty()) {
+                itemList = new ArrayList<>();
+                for (ItemDTO i : itemDTOList) {
+                    itemList.add(convertItemDTOToItem(i));
+                }
+            }
+            return itemList;
 
     }
     public static List<ItemDTO> convertItemPageToItemDTOList(Page<Item> itemPage){

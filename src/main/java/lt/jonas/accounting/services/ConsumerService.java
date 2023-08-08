@@ -8,6 +8,7 @@ import lt.jonas.accounting.entities.Consumer;
 import lt.jonas.accounting.repositories.ConsumerRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -22,15 +23,11 @@ public class ConsumerService {
     }
 
     public List<ConsumerDTO> getConsumers(Pageable pageable) {
-            return ConsumerConverter.convertConsumerPageToConsumerDTOList(consumerRepository.findAll(pageable));
+        return ConsumerConverter.convertConsumerPageToConsumerDTOList(consumerRepository.findAll(pageable));
 
     }
-
     public ConsumerDTO getConsumerById(Long id) {
-        return ConsumerConverter
-                .convertConsumerToConsumerDTO(consumerRepository
-                        .findById(id)
-                        .orElseThrow(NoSuchElementException::new));
+        return ConsumerConverter.convertConsumerToConsumerDTO(consumerRepository.findById(id).orElseThrow(NoSuchElementException::new));
     }
 
     public ConsumerDTO updateConsumer(Consumer consumer) {

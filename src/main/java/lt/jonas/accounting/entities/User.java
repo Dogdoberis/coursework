@@ -2,11 +2,9 @@ package lt.jonas.accounting.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lt.jonas.accounting.enumerators.Role;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;

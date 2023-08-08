@@ -2,6 +2,7 @@ package lt.jonas.accounting.controllers;
 
 import lt.jonas.accounting.converters.ItemConverter;
 import lt.jonas.accounting.dto.ItemDTO;
+import lt.jonas.accounting.exeptions.DeleteExeption;
 import lt.jonas.accounting.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -42,9 +43,9 @@ public class ItemController {
     }
     @DeleteMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteItemById(Long id) {
+    public ResponseEntity<Void> deleteItemById(Long id) throws DeleteExeption {
         itemService.deleteItemById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
     @GetMapping("/serch")
     public ResponseEntity<?> serchItems(@PageableDefault

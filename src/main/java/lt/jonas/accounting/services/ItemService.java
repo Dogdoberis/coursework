@@ -5,6 +5,7 @@ import lt.jonas.accounting.converters.ItemConverter;
 import lt.jonas.accounting.dto.ItemDTO;
 import lt.jonas.accounting.entities.Invoice;
 import lt.jonas.accounting.entities.Item;
+import lt.jonas.accounting.exeptions.DeleteExeption;
 import lt.jonas.accounting.repositories.InvoiceRepository;
 import lt.jonas.accounting.repositories.ItemRepository;
 import org.springframework.data.domain.Pageable;
@@ -41,12 +42,14 @@ public class ItemService {
     }
 
     public List<ItemDTO> getItems(Pageable pageable) {
-            return ItemConverter.convertItemPageToItemDTOList(itemRepository.findAll(pageable));
+        return ItemConverter.convertItemPageToItemDTOList(itemRepository.findAll(pageable));
     }
+
     public List<ItemDTO> getItemsByIds(List<Long> id) {
         List<Item> items = itemRepository.findAllById(id);
         return ItemConverter.convertItemListToItemDTOList(items);
     }
+
     public List<ItemDTO> searchItems(String code, String title, String description) {
         List<Item> items = null;
         if (code != null) {
@@ -65,12 +68,14 @@ public class ItemService {
         return ItemConverter.convertItemListToItemDTOList(items);
 
     }
-    public void deleteItemById(Long id) {
+
+    public void deleteItemById(Long id) throws DeleteExeption {
         List<Invoice> invoices = invoiceRepository.findInvoiceByItemsId(id);
-        if (!invoices.isEmpty()) {
-            throw new IllegalStateException("Item with ID " + id + " cannot be deleted as it has associated invoices.");
+        if (invoices.isEmpty()) {
+            itemRepository.deleteById(id);
+        } else {
+            throw new DeleteExeption("Item with ID " + id + " cannot be deleted as it has associated invoices.");
         }
-        itemRepository.deleteById(id);
     }
 
 }

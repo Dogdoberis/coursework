@@ -6,8 +6,6 @@ import lt.jonas.accounting.dto.ConsumerDTO;
 import lt.jonas.accounting.dto.InvoiceDTO;
 import lt.jonas.accounting.dto.ItemDTO;
 import lt.jonas.accounting.dto.UserDTO;
-import lt.jonas.accounting.entities.Invoice;
-import lt.jonas.accounting.entities.Item;
 import lt.jonas.accounting.services.ConsumerService;
 import lt.jonas.accounting.services.InvoiceService;
 import lt.jonas.accounting.services.ItemService;

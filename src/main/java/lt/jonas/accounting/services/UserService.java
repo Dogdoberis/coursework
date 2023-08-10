@@ -8,7 +8,6 @@ import lt.jonas.accounting.repositories.UserRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -34,8 +33,6 @@ public class UserService {
         }
         return UserConverter.convertUserListToUserDTOList(userRepository.findAll());
     }
-
-
     public UserDTO updateUser(User user) {
         User userToUpdate = userRepository.findById(user.getId()).orElseThrow(NoSuchElementException::new);
         userToUpdate.setName(user.getName());

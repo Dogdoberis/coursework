@@ -30,8 +30,12 @@ public class Invoice {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
-    @OneToMany
-    @JoinColumn(name = "item_id")
+    @ManyToMany
+    @JoinTable(
+            name = "invoice_item",
+            joinColumns = @JoinColumn(name = "invoice_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
     private List<Item> items;
     @Column(name = "created")
     private LocalDateTime created;

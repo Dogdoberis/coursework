@@ -20,13 +20,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 @RestController
 @RequestMapping("/invoices")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 public class InvoiceController {
     @Autowired
     InvoiceService invoiceService;
@@ -64,19 +64,19 @@ public class InvoiceController {
         return ResponseEntity.ok(invoiceService.getInvoices(pageable));
     }
 
-    @GetMapping("/invoices")
+    @GetMapping("/period")
     public ResponseEntity<List<InvoiceDTO>> getIvoicesByPeriod(@RequestParam("fromDate") String fromDateS, @RequestParam("toDate") String toDateS) {
         LocalDate fromDate = LocalDate.parse(fromDateS);
         LocalDate toDade = LocalDate.parse(toDateS);
         return ResponseEntity.ok(invoiceService.findInvoicesByPeriod(fromDate, toDade));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")   /*????*/
     public ResponseEntity<InvoiceDTO> getInvoicesById(@PathVariable Long id) {
         return ResponseEntity.ok(invoiceService.getInvoiceById(id));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/invoices/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteInvoiceById(@PathVariable Long id) {
         invoiceService.deleteInvoiceById(id);

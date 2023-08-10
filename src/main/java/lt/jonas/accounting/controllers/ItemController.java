@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/items")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 public class ItemController {
     String mesage = "According to the submitted search, nothing was found";
     @Autowired

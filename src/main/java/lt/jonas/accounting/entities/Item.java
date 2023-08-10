@@ -6,6 +6,7 @@ import lombok.Setter;
 import lt.jonas.accounting.enumerators.ItemType;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -25,8 +26,8 @@ public class Item {
     private Double price;
     @Column
     private String description;
-    @ManyToOne
-    private Invoice invoice;
+    @ManyToMany(mappedBy = "items")
+    private List<Invoice> invoices;
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")

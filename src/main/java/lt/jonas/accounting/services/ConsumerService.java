@@ -17,20 +17,24 @@ import java.util.NoSuchElementException;
 public class ConsumerService {
     private final ConsumerRepository consumerRepository;
 
+    @SuppressWarnings("null")
     public ConsumerDTO createConsumer(Consumer consumer) {
         consumerRepository.save(consumer);
         return ConsumerConverter.convertConsumerToConsumerDTO(consumer);
     }
 
+    @SuppressWarnings("null")
     public List<ConsumerDTO> getConsumers(Pageable pageable) {
         return ConsumerConverter.convertConsumerPageToConsumerDTOList(consumerRepository.findAll(pageable));
 
     }
+    @SuppressWarnings("null")
     public ConsumerDTO getConsumerById(Long id) {
         return ConsumerConverter.convertConsumerToConsumerDTO(consumerRepository.findById(id).orElseThrow(NoSuchElementException::new));
     }
 
     public ConsumerDTO updateConsumer(Consumer consumer) {
+        @SuppressWarnings("null")
         Consumer consumerToUpdate = consumerRepository
                 .findById(consumer.getId())
                 .orElseThrow(NoSuchElementException::new);
@@ -54,7 +58,7 @@ public class ConsumerService {
         if (name != null) {
             name = name.replaceAll("[\\d?.,-/d]+", "");
             consumers = consumerRepository.findByNameIgnoreCaseContaining(name);
-        } else if (name == null || name.isEmpty()) {
+        } else {
             consumers = consumerRepository.findAll();
         }
         if (code != null) {

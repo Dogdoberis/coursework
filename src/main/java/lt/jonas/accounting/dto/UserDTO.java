@@ -9,7 +9,7 @@ import lt.jonas.accounting.enumerators.Role;
 @Getter
 public class UserDTO {
     private Long id;
-    private String name;
+    private String name; //nicknme
     private String lastName;
     private String userNmae;
     private String password;

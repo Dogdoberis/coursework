@@ -1,6 +1,5 @@
 package lt.jonas.accounting.repositories;
 
-import lt.jonas.accounting.dto.ItemDTO;
 import lt.jonas.accounting.entities.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

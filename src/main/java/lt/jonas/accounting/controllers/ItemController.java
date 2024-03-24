@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -34,7 +33,7 @@ public class ItemController {
                 .body(itemService.updateItem(ItemConverter.convertItemDTOToItem(itemDTO)));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ItemDTO> getItemById(@RequestBody Long id) {
+    public ResponseEntity<ItemDTO> getItemById (@RequestBody Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
     }
     @GetMapping
@@ -54,10 +53,10 @@ public class ItemController {
                                         @RequestParam(required = false) String description) {
         List<ItemDTO> itemDTOList = itemService.searchItems(code, title, description);
         try {
-            if (!itemDTOList.isEmpty()) {
+            if (itemDTOList.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.OK).body(mesage);
             }
-        }catch (NullPointerException e){
-            return ResponseEntity.status(HttpStatus.OK).body(mesage);
+        } catch (NullPointerException ignored) {
         }
         return ResponseEntity.ok(itemDTOList);
     }

@@ -20,17 +20,20 @@ public class ItemService {
     private final ItemRepository itemRepository;
     public final InvoiceRepository invoiceRepository;
 
+    @SuppressWarnings("null")
     public ItemDTO createItem(Item item) throws IllegalArgumentException {
         itemRepository.save(item);
         return ItemConverter.convertItemToItemDTO(item);
     }
 
+    @SuppressWarnings("null")
     public ItemDTO getItemById(Long id) {
         return ItemConverter
                 .convertItemToItemDTO(itemRepository.findById(id).orElseThrow(NoSuchElementException::new));
     }
 
     public ItemDTO updateItem(Item item) {
+        @SuppressWarnings("null")
         Item itemToUpdate = itemRepository.findById(item.getId()).orElseThrow(NoSuchElementException::new);
         itemToUpdate.setId(item.getId());
         itemToUpdate.setCode(item.getCode());
@@ -41,11 +44,13 @@ public class ItemService {
         return ItemConverter.convertItemToItemDTO(itemToUpdate);
     }
 
+    @SuppressWarnings("null")
     public List<ItemDTO> getItems(Pageable pageable) {
         return ItemConverter.convertItemPageToItemDTOList(itemRepository.findAll(pageable));
     }
 
     public List<ItemDTO> getItemsByIds(List<Long> id) {
+        @SuppressWarnings("null")
         List<Item> items = itemRepository.findAllById(id);
         return ItemConverter.convertItemListToItemDTOList(items);
     }
@@ -69,6 +74,7 @@ public class ItemService {
 
     }
 
+    @SuppressWarnings("null")
     public void deleteItemById(Long id) throws DeleteExeption {
         List<Invoice> invoices = invoiceRepository.findInvoiceByItemsId(id);
         if (invoices.isEmpty()) {

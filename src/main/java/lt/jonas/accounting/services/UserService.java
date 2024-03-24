@@ -23,6 +23,7 @@ public class UserService {
         return UserConverter.convertUserToUserDTO(user);
     }
 
+    @SuppressWarnings("null")
     public UserDTO getUserById(Long id) {
         return UserConverter.convertUserToUserDTO(userRepository.findById(id).orElseThrow(NoSuchElementException::new));
     }
@@ -34,6 +35,7 @@ public class UserService {
         return UserConverter.convertUserListToUserDTOList(userRepository.findAll());
     }
     public UserDTO updateUser(User user) {
+        @SuppressWarnings("null")
         User userToUpdate = userRepository.findById(user.getId()).orElseThrow(NoSuchElementException::new);
         userToUpdate.setName(user.getName());
         userToUpdate.setLastName(user.getLastName());
@@ -42,6 +44,7 @@ public class UserService {
         return UserConverter.convertUserToUserDTO(userToUpdate);
     }
 
+    @SuppressWarnings("null")
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }

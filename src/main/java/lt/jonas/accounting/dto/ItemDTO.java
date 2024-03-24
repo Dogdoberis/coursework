@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lt.jonas.accounting.enumerators.ItemType;
 
-import java.util.List;
 
 
 @RequiredArgsConstructor

@@ -12,11 +12,13 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class OwnerService {
     private final OwnerRepository ownerRepository;
+    @SuppressWarnings("null")
     public OwnerDTO createOwner(Owner Owner) {
         ownerRepository.save(Owner);
         return OwnerConverter.convertOwnerToOwnerDTO(Owner);
     }
     public OwnerDTO updateOwner(Owner Owner) {
+        @SuppressWarnings("null")
         Owner OwnerToUpdate = ownerRepository
                 .findById(Owner.getId())
                 .orElseThrow(NoSuchElementException::new);

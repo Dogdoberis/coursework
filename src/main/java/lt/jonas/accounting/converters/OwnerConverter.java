@@ -4,10 +4,16 @@ import lt.jonas.accounting.dto.OwnerDTO;
 import lt.jonas.accounting.entities.Owner;
 
 public class OwnerConverter {
+    /**
+     * Convert an OvnerDTO object to an Owner ogject.
+     * @param OwnerDTO The OwnerDTO object to convert.
+     * @return An Owner object.
+     */
     public static Owner convertOwnerDtoToOwner(OwnerDTO OwnerDTO) {
-        Owner Owner = null;
-        if (OwnerDTO != null) {
-            Owner = new Owner();
+        Owner Owner = null; //Create a new Owner object
+        if (OwnerDTO != null) { // Check if the OwnerDTO object is not null
+            Owner = new Owner(); // Instantiate a new Owner object
+            // Set properties of the Owner object based on OwnerDTO
             Owner.setId(OwnerDTO.getId());
             Owner.setTitle(OwnerDTO.getTitle());
             Owner.setName(OwnerDTO.getName());
@@ -22,13 +28,19 @@ public class OwnerConverter {
 
 
         }
-        return Owner;
+        return Owner; // Return the Owner object
     }
 
+    /**
+     * Converts an Owner object to an OwnerDTO object.
+     * @param Owner The Owner object to convert.
+     * @return An OwnerDTO object.
+     */
     public static OwnerDTO convertOwnerToOwnerDTO(Owner Owner) {
-        OwnerDTO OwnerDTO = null;
-        if (Owner != null) {
-            OwnerDTO = new OwnerDTO();
+        OwnerDTO OwnerDTO = null; // Create a new OwnerDTO object
+        if (Owner != null) { // Check if the Owner object is not null
+            OwnerDTO = new OwnerDTO(); // Instantiate a new OwnerDTO object
+            // Set properties of the OwnerDTO object based on Owner
             OwnerDTO.setId(Owner.getId());
             OwnerDTO.setTitle(Owner.getTitle());
             OwnerDTO.setName(Owner.getName());
@@ -43,6 +55,6 @@ public class OwnerConverter {
 
 
         }
-        return OwnerDTO;
+        return OwnerDTO; // Return the OwnerDTO object
     }
 }

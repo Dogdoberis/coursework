@@ -13,22 +13,27 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+
 @AllArgsConstructor
 @Service
 public class InvoiceService {
 
+
     private final InvoiceRepository invoiceRepository;
 
+    @SuppressWarnings("null")
     public InvoiceDTO newInvoice(Invoice invoice) {
         invoiceRepository.save(invoice);
         return InvoiceConverter.convertInvoiceToInvoiceDTO(invoice);
     }
 
+    @SuppressWarnings("null")
     public InvoiceDTO getInvoiceById(Long id) {
         return InvoiceConverter.convertInvoiceToInvoiceDTO(invoiceRepository.getReferenceById(id));
     }
 
     public InvoiceDTO updateInvoice(Invoice invoice) {
+        @SuppressWarnings("null")
         Invoice invoiceToUpdate = invoiceRepository.findById(invoice.getId()).orElseThrow(NoSuchElementException::new);
         invoiceToUpdate.setInvoiceNr(invoice.getInvoiceNr());
         invoiceToUpdate.setInvoiceDate(invoice.getInvoiceDate());
@@ -36,6 +41,7 @@ public class InvoiceService {
     }
 
     public List<InvoiceDTO> getInvoices(Pageable pageable) {
+        @SuppressWarnings("null")
         Page<Invoice> invoices = invoiceRepository.findAll(pageable);
         return InvoiceConverter.convertInvoicePageToInvoiceDTOList(invoices);
     }
@@ -43,6 +49,7 @@ public class InvoiceService {
     public List<InvoiceDTO> findInvoicesByPeriod(LocalDate fromDate, LocalDate toDate) {
         return InvoiceConverter.convertInvoicesToInvoicesDTOList(invoiceRepository.findByInvoiceDateBetween(fromDate, toDate));
     }
+    @SuppressWarnings("null")
     public void deleteInvoiceById(Long id)throws IllegalStateException {
         invoiceRepository.deleteById(id);
     }
